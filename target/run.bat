@@ -1,0 +1,1 @@
+java -jar fat-ultrasomma.jar
