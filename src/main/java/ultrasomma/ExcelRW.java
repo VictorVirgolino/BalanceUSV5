@@ -204,10 +204,10 @@ public class ExcelRW {
                tabelasMedicas(procedimentos, "Procedimentos");
           }
 
-          printTabela("MedValeria");
-          printTabela("MedGerusa");
-          printTabela("MedLaurise");
-          printTabela("Procedimentos");
+//          printTabela("MedValeria");
+//          printTabela("MedGerusa");
+//          printTabela("MedLaurise");
+//          printTabela("Procedimentos");
 
 
           sql =   "CREATE TABLE Exames ( " +
@@ -216,7 +216,9 @@ public class ExcelRW {
                   "   procedimento VARCHAR(255) , " +
                   "   valor DOUBLE , " +
                   "   convenio VARCHAR(255) ," +
-                  "   medica VARCHAR(255) " +
+                  "   medica VARCHAR(255) ," +
+                  "   id int NOT NULL AUTO_INCREMENT," +
+                  "   PRIMARY KEY (id)" +
                   ");";
 
           stm.executeUpdate(sql);
@@ -224,10 +226,7 @@ public class ExcelRW {
 
           //Alimentando Tabelas de Exames
           if(afrafep != null ){
-               System.out.println("Fazendo afrafep");
                tabelaExames(afrafep, "Afrafep");
-               System.out.println("Terminou afrafep");
-               printTabela("Exames");
           }
           if(caixa != null ){
                tabelaExames(caixa, "Caixa");
@@ -239,23 +238,23 @@ public class ExcelRW {
                tabelaExames(embrapa, "Embrapa");
           }
           if(unimed != null ){
-               System.out.println("Fazendo Unimed");
                tabelaExames(unimed, "Unimed");
-               System.out.println("Terminou Unimed");
+
           }
 
 
 
 //
 //          Print das Tabelas
-          printTabela("MedValeria");
-          printTabela("MedGerusa");
-          printTabela("MedLaurise");
-          printExames("Exames");
+//          printTabela("MedValeria");
+//          printTabela("MedGerusa");
+//          printTabela("MedLaurise");
+//          printExames("Exames");
 
 //          writeResume();
+          corrigindoErrosAbreviacao();
+          writeExcelOK();
           writeExcelErros();
-
 //          printErros();
 
      }
@@ -273,7 +272,6 @@ public class ExcelRW {
                row = sh.getRow(i);
                Iterator<Cell> cellIterator = row.cellIterator();
                if(checkIfRowIsEmpty(row)){
-                    System.out.println("Linha em branco");
                     break;
                }
                cont = 0;
@@ -289,15 +287,15 @@ public class ExcelRW {
                while (cellIterator.hasNext()) {
                     cell = cellIterator.next();
                     if (cont == 0) {
-                         data = cell.getDateCellValue();
-                         if(data == null){
+                         strData = cell.getStringCellValue();
+                         if(strData == null) {
                               Etrue = true;
-                         }else{
-                              strData = format.format(data);
                          }
+//                         }else{
+//                              strData = format.format(data);
+//                         }
                     } else if (cont == 1) {
                         nome = cell.getStringCellValue();
-                        System.out.println(nome);
                         if(nome == null){
                               Etrue = true;
                          }else {
@@ -305,7 +303,6 @@ public class ExcelRW {
                         }
                     } else if (cont == 2) {
                          procedimento = cell.getStringCellValue();
-                         System.out.println(procedimento);
                          if(procedimento == null){
                               Etrue = true;
                          }
@@ -406,7 +403,8 @@ public class ExcelRW {
                        "'%s', " +
                        "%s, " +
                        "'%s', " +
-                       "'%s'" +
+                       "'%s'," +
+                       "NULL" +
                        ");", strData, nome, procedimento, strValor, name, medica);
                stm.executeUpdate(sql);
           }
@@ -463,7 +461,6 @@ public class ExcelRW {
           for (int i = 1; i <= rowEnd; i++) {
                row = sh.getRow(i);
                if(checkIfRowIsEmpty(row)){
-                    System.out.println("Linha em branco");
                     break;
                }
                Iterator<Cell> cellIterator = row.cellIterator();
@@ -475,15 +472,15 @@ public class ExcelRW {
                while (cellIterator.hasNext()) {
                     cell = cellIterator.next();
 
-                    if(cont == 0){
-                         data = cell.getDateCellValue();
-                         if(data == null){
-                              isError = "true";
-                         }else{
-                              strData = format.format(data);
+                    if (cont == 0) {
+                         strData = cell.getStringCellValue();
+                         if (strData == null) isError = "true";
+                    }
+//                         }else{
+//                              strData = format.format(data);
 //                              System.out.println(strData);
-                         }
-                    }else if(cont == 1){
+//                         }
+                    else if(cont == 1){
                          nome = cell.getStringCellValue();
                          if(nome == null){
                               isError = "true";
@@ -625,7 +622,11 @@ public class ExcelRW {
 
      private static String getQuant(String convenio, String medica) throws SQLException {
           sql = String.format("select * from exames" +
-                  " where procedimento != 'Filme' and convenio = '%s' and medica = '%s';", convenio, medica);
+                  " where procedimento != 'Filme' and " +
+                  "procedimento != 'Material' and" +
+                  " procedimento != 'Medicamento' and" +
+                  " convenio = '%s' and" +
+                  " medica = '%s';", convenio, medica);
           query = stm.executeQuery(sql);
           int quant = 0;
           while(query.next()){
@@ -844,6 +845,70 @@ public class ExcelRW {
 
      }
 
+     public static void writeExcelOK() throws SQLException, IOException {
+          String[] columns = {"Data", "Nome do Paciente", "Procedimento", "Valor", "Convênio", "Médica"};
+          String[] convenios = {"Afrafep", "Caixa", "Cassi", "Embrapa", "Unimed"};
+          Workbook wb2 = new XSSFWorkbook();
+
+          //Fonts & Styles
+          Font headerFont = wb2.createFont();
+          headerFont.setBold(true);
+          headerFont.setFontHeightInPoints((short) 14);
+          headerFont.setColor(IndexedColors.RED.getIndex());
+
+          Font titleFont = wb2.createFont();
+          titleFont.setBold(true);
+          titleFont.setFontHeightInPoints((short) 16);
+
+          CellStyle titleCellStyle = wb2.createCellStyle();
+          titleCellStyle.setFont(titleFont);
+
+          CellStyle headerCellStyle = wb2.createCellStyle();
+          headerCellStyle.setFont(headerFont);
+
+          for (String convenio : convenios) {
+               sh = wb2.createSheet(String.format("BalanceUS - OK - %s", convenio));
+
+               Row titleRow = sh.createRow(0);
+               Row headerRow = sh.createRow(1);
+
+               cell = titleRow.createCell(0);
+               cell.setCellValue(convenio);
+               cell.setCellStyle(titleCellStyle);
+
+               for (int i = 0; i < columns.length; i++) {
+                    cell = headerRow.createCell(i);
+                    cell.setCellValue(columns[i]);
+                    cell.setCellStyle(headerCellStyle);
+               }
+
+               int RowNum = 2;
+
+               sql = String.format("select * from exames" +
+                       " where convenio = '%s' and" +
+                       " medica != 'error';", convenio);
+               query = stm.executeQuery(sql);
+               while (query.next()) {
+                    row = sh.createRow(RowNum++);
+                    row.createCell(0).setCellValue(query.getString(1));
+                    row.createCell(1).setCellValue(query.getString(2));
+                    row.createCell(2).setCellValue(query.getString(3));
+                    row.createCell(3).setCellValue(query.getDouble(4));
+                    row.createCell((4)).setCellValue(query.getString(5));
+                    row.createCell((5)).setCellValue(query.getString(6));
+               }
+
+               for (int k = 0; k < columns.length; k++) {
+                    sh.autoSizeColumn(k);
+               }
+          }
+
+          fos = new FileOutputStream("BalanceUs - OK.xlsx");
+          wb2.write(fos);
+          fos.close();
+
+     }
+
      public static void writeExcelErros() throws SQLException, IOException {
           String[] columns = {"Data", "Nome do Paciente", "Procedimento", "Valor", "Convênio"};
           String[] convenios = {"Afrafep", "Caixa", "Cassi", "Embrapa", "Unimed"};
@@ -930,6 +995,117 @@ public class ExcelRW {
                }
           }
           return true;
+     }
+
+     private static void corrigindoErrosAbreviacao() throws SQLException {
+
+          sql = "select * from exames" +
+                  " where convenio = 'Unimed' and medica = 'error';";
+          query = stm.executeQuery(sql);
+          ResultSet query1;
+          int query2;
+          Statement stm1 = con.createStatement();
+          String errado = "";
+          int id = 0;
+          String sqlG = "";
+          String sqlL = "";
+          String sqlV = "";
+          String sqlP = "";
+          double total = 0.0;
+          while(query.next()){
+               String[] palavras = {};
+               errado = query.getString(2);
+               id = query.getInt(7);
+               System.out.println(errado);
+               System.out.println(id);
+               palavras =  errado.split(" ");
+               sqlG = "select * from MedGerusa where";
+               sqlL = "select * from MedLaurise where";
+               sqlV = "select * from MedValeria where";
+               sqlP = "select * from procedimentos where";
+               medica = "";
+               int cont = 1;
+               for (String palavra : palavras){
+                    if(cont < palavras.length){
+                         sqlG += " nome LIKE '%" + palavra + "%' AND";
+                         sqlL += " nome LIKE '%" + palavra + "%' AND";
+                         sqlV += " nome LIKE '%" + palavra + "%' AND";
+                         sqlP += " nome LIKE '%" + palavra + "%' AND";
+                    }else{
+                         sqlG += " nome LIKE '%" + palavra + "%';";
+                         sqlL += " nome LIKE '%" + palavra + "%';";
+                         sqlV += " nome LIKE '%" + palavra + "%';";
+                         sqlP += " nome LIKE '%" + palavra + "%';";
+                    }
+                    cont++;
+
+               }
+               query1 = stm1.executeQuery(sqlG);
+               while(query1.next()){
+                    medica = "Gerusa";
+               }
+               query1 = stm1.executeQuery(sqlL);
+               while(query1.next()){
+                    medica = "Laurise";
+               }
+               query1 = stm1.executeQuery(sqlV);
+               while(query1.next()){
+                    medica = "Valéria";
+               }
+               query1 = stm1.executeQuery(sqlP);
+               while(query1.next()){
+                    medica = "Procedimentos";
+               }
+
+               if(medica.equals("Gerusa")){
+                    sql = String.format("update exames " +
+                            "set medica = '%s' " +
+                            "where id = %d;", medica, id);
+                    query2 = stm1.executeUpdate(sql);
+                    System.out.println(query2);
+
+               }
+               else if(medica.equals("Laurise")){
+                    sql = String.format("update exames " +
+                            "set medica = '%s' " +
+                            "where id = %d;", medica, id);
+                    query2 = stm1.executeUpdate(sql);
+                    System.out.println(query2);
+
+               }
+               else if(medica.equals("Valéria")){
+                    sql = String.format("update exames " +
+                            "set medica = '%s' " +
+                            "where id = %d;", medica, id);
+                    query2 = stm1.executeUpdate(sql);
+                    System.out.println(query2);
+
+               }
+               else if(medica.equals("Procedimentos")){
+                    sql = String.format("update exames " +
+                            "set medica = '%s' " +
+                            "where id = %d;", medica, id);
+                    query2 = stm1.executeUpdate(sql);
+                    System.out.println(query2);
+               }
+
+
+
+//               sql = "SELECT * FROM Med" +
+//                       "WHERE column1 LIKE '%word1%'" +
+//                       "  AND column1 LIKE '%word2%'" +
+//                       "";
+          }
+//          String teste = "simone";
+//          sql = "select * from MedValeria" +
+//                  " where nome LIKE " +
+//                  "'%" + teste + "%';";
+//          query = stm.executeQuery(sql);
+//          System.out.println("testing");
+//          while(query.next()){
+//               System.out.println(query.getString(2));
+//          }
+
      }
 
 
