@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -674,6 +675,188 @@
                   </GridPane>
                </content>
             </Tab>
+            <Tab text="Unimed PF">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane prefHeight="716.0" prefWidth="800.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="329.0" minWidth="10.0" prefWidth="160.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="516.0" minWidth="10.0" prefWidth="463.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.0" minWidth="10.0" prefWidth="168.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Geruza">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Quantidade de Exames Realizados:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="testetxt51" text="Total Arrecadado em Filme:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Total Arrecadado:" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Laurise" GridPane.rowIndex="7">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Quantidade de Exames Realizados:" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Total Arrecadado em Filme:" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Total Arrecadado:" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Valeria" GridPane.rowIndex="14">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Quantidade de Exames Realizados:" GridPane.columnIndex="1" GridPane.rowIndex="15">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Total Arrecadado em Filme:" GridPane.columnIndex="1" GridPane.rowIndex="16">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Total Arrecadado:" GridPane.columnIndex="1" GridPane.rowIndex="19">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Erros" GridPane.rowIndex="25">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Quantidade de Erros Encontrados:" GridPane.columnIndex="1" GridPane.rowIndex="26">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="quantG6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <TextField fx:id="filmeG6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <TextField fx:id="totalG6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <TextField fx:id="quantL6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                              <TextField fx:id="filmeL6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                              <TextField fx:id="totalL6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                              <TextField fx:id="quantV6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="15" />
+                              <TextField fx:id="filmeV6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+                              <TextField fx:id="totalV6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="19" />
+                              <TextField fx:id="erros6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="26" />
+                              <Label text="Procedimentos" GridPane.rowIndex="21">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Quantidade de Procedimentos Realizados:" GridPane.columnIndex="1" GridPane.rowIndex="22">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="quantP6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="22" />
+                              <Label text="Total Arrecadado:" GridPane.columnIndex="1" GridPane.rowIndex="23">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="totalP6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="23" />
+                              <Label text="Total Arrecadado em Medicamentos:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="medicG6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <Label text="Total Arrecadado em Material:" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="materG6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label text="Total Arrecadado em Medicamentos:" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="medicL6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                              <Label text="Total Arrecadado em Material:" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="materL6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                              <Label text="Total Arrecadado em Medicamentos:" GridPane.columnIndex="1" GridPane.rowIndex="17">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="medicV6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="17" />
+                              <Label text="Total Arrecadado em Material:" GridPane.columnIndex="1" GridPane.rowIndex="18">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="materV6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
             <Tab fx:id="afrafepTab31" text="Todos os Convênios">
                <content>
                   <GridPane>
@@ -733,13 +916,13 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="quantG6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <TextField fx:id="totalG6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <TextField fx:id="quantL6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <TextField fx:id="totalL6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                        <TextField fx:id="quantV6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-                        <TextField fx:id="totalV6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                        <TextField fx:id="erros6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="17" />
+                        <TextField fx:id="quantG7" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="totalG7" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <TextField fx:id="quantL7" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <TextField fx:id="totalL7" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <TextField fx:id="quantV7" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                        <TextField fx:id="totalV7" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                        <TextField fx:id="erros7" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="17" />
                         <Label text="Procedimentos" GridPane.rowIndex="12">
                            <font>
                               <Font size="20.0" />
@@ -750,13 +933,13 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="quantP6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                        <TextField fx:id="quantP7" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="13" />
                         <Label text="Total Arrecadado:" GridPane.columnIndex="1" GridPane.rowIndex="14">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="totalP6" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                        <TextField fx:id="totalP7" editable="false" maxWidth="100.0" text="0" GridPane.columnIndex="2" GridPane.rowIndex="14" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="160.0" />

@@ -133,17 +133,35 @@ public class SecondaryController implements Initializable {
     @FXML
     private TextField erros5;
 
-    //Ultrasomma
+    //Unimed
     @FXML
     private TextField quantG6;
+    @FXML
+    private TextField filmeG6;
+    @FXML
+    private TextField medicG6;
+    @FXML
+    private TextField materG6;
     @FXML
     private TextField totalG6;
     @FXML
     private TextField quantL6;
     @FXML
+    private TextField filmeL6;
+    @FXML
+    private TextField medicL6;
+    @FXML
+    private TextField materL6;
+    @FXML
     private TextField totalL6;
     @FXML
     private TextField quantV6;
+    @FXML
+    private TextField filmeV6;
+    @FXML
+    private TextField medicV6;
+    @FXML
+    private TextField materV6;
     @FXML
     private TextField totalV6;
     @FXML
@@ -152,6 +170,26 @@ public class SecondaryController implements Initializable {
     private TextField totalP6;
     @FXML
     private TextField erros6;
+
+    //Ultrasomma
+    @FXML
+    private TextField quantG7;
+    @FXML
+    private TextField totalG7;
+    @FXML
+    private TextField quantL7;
+    @FXML
+    private TextField totalL7;
+    @FXML
+    private TextField quantV7;
+    @FXML
+    private TextField totalV7;
+    @FXML
+    private TextField quantP7;
+    @FXML
+    private TextField totalP7;
+    @FXML
+    private TextField erros7;
 
 
 
@@ -170,7 +208,8 @@ public class SecondaryController implements Initializable {
         ArrayList<String> listCassi = (ArrayList<String>) data.get(2);
         ArrayList<String> listEmbrapa = (ArrayList<String>) data.get(3);
         ArrayList<String> listUnimed = (ArrayList<String>) data.get(4);
-        ArrayList<String> listUltrasomma = (ArrayList<String>) data.get(5);
+        ArrayList<String> listUnimedPF = (ArrayList<String>) data.get(5);
+        ArrayList<String> listUltrasomma = (ArrayList<String>) data.get(6);
 
 
         //Afrafep
@@ -237,16 +276,36 @@ public class SecondaryController implements Initializable {
         totalP5.setText(listUnimed.get(16));
         erros5.setText(listUnimed.get(17));
 
+        //Unimed
+        quantG6.setText(listUnimedPF.get(0));
+        filmeG6.setText(listUnimedPF.get(1));
+        medicG6.setText(listUnimedPF.get(2));
+        materG6.setText(listUnimedPF.get(3));
+        totalG6.setText(listUnimedPF.get(4));
+        quantL6.setText(listUnimedPF.get(5));
+        filmeL6.setText(listUnimedPF.get(6));
+        medicL6.setText(listUnimedPF.get(7));
+        materL6.setText(listUnimedPF.get(8));
+        totalL6.setText(listUnimedPF.get(9));
+        quantV6.setText(listUnimedPF.get(10));
+        filmeV6.setText(listUnimedPF.get(11));
+        medicV6.setText(listUnimedPF.get(12));
+        materV6.setText(listUnimedPF.get(13));
+        totalV6.setText(listUnimedPF.get(14));
+        quantP6.setText(listUnimedPF.get(15));
+        totalP6.setText(listUnimedPF.get(16));
+        erros6.setText(listUnimedPF.get(17));
+
       //  Ultrasomma
-        quantG6.setText(listUltrasomma.get(0));
-        totalG6.setText(listUltrasomma.get(1));
-        quantL6.setText(listUltrasomma.get(2));
-        totalL6.setText(listUltrasomma.get(3));
-        quantV6.setText(listUltrasomma.get(4));
-        totalV6.setText(listUltrasomma.get(5));
-        quantP6.setText(listUltrasomma.get(6));
-        totalP6.setText(listUltrasomma.get(7));
-        erros6.setText(listUltrasomma.get(8));
+        quantG7.setText(listUltrasomma.get(0));
+        totalG7.setText(listUltrasomma.get(1));
+        quantL7.setText(listUltrasomma.get(2));
+        totalL7.setText(listUltrasomma.get(3));
+        quantV7.setText(listUltrasomma.get(4));
+        totalV7.setText(listUltrasomma.get(5));
+        quantP7.setText(listUltrasomma.get(6));
+        totalP7.setText(listUltrasomma.get(7));
+        erros7.setText(listUltrasomma.get(8));
     }
 
 

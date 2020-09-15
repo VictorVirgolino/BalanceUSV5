@@ -6,9 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-//import java.io.*;
-
 import java.io.*;
 import java.sql.*;
 import java.text.DecimalFormat;
@@ -30,6 +27,8 @@ public class ExcelRW {
      private static String medGerusa;
      private static String medLaurise;
      private static String procedimentos;
+     private static String unimedPFV;
+     private static String unimedPFG;
      private static String afrafep;
      private static String caixa;
      private static String cassi;
@@ -132,23 +131,49 @@ public class ExcelRW {
      private static String totalP5;
      private static String erros5;
 
-     //Ultrasomma
-     private static List<String> listUltrasomma;
+     //Unimed  PF 
+     private static List<String> listUnimedPF;
      private static String quantG6;
+     private static String filmeG6;
+     private static String medicG6;
+     private static String materG6;
      private static String totalG6;
      private static String quantL6;
+     private static String filmeL6;
+     private static String medicL6;
+     private static String materL6;
      private static String totalL6;
      private static String quantV6;
+     private static String filmeV6;
+     private static String medicV6;
+     private static String materV6;
      private static String totalV6;
      private static String quantP6;
      private static String totalP6;
      private static String erros6;
+     
+
+     //Ultrasomma
+     private static List<String> listUltrasomma;
+     private static String quantG7;
+     private static String totalG7;
+     private static String quantL7;
+     private static String totalL7;
+     private static String quantV7;
+     private static String totalV7;
+     private static String quantP7;
+     private static String totalP7;
+     private static String erros7;
 
 
      public static void lerExcels(ObservableList<String> arquivos) throws SQLException, ClassNotFoundException, IOException {
 
           for (String arquivo : arquivos) {
-               if (arquivo.contains("valeria")) {
+               if(arquivo.contains("unimed pf valeria")){
+                    unimedPFV = arquivo;
+               } else if(arquivo.contains("unimed pf gerusa")){
+                    unimedPFG = arquivo;
+               } else if (arquivo.contains("valeria")) {
                     medValeria = arquivo;
                } else if (arquivo.contains("gerusa")) {
                     medGerusa = arquivo;
@@ -164,10 +189,12 @@ public class ExcelRW {
                     embrapa = arquivo;
                } else if (arquivo.contains("unimed")) {
                     unimed = arquivo;
-               } else if(arquivo.contains("procedimentos")){
+               } else if(arquivo.contains("procedimentos")) {
                     procedimentos = arquivo;
                }
           }
+
+
 
           //Prints Files
 //          printPath(medValeria);
@@ -241,6 +268,14 @@ public class ExcelRW {
                tabelaExames(unimed, "Unimed");
 
           }
+          if(unimedPFV != null ){
+               tabelaExames(unimedPFV, "Unimed PF");
+
+          }if(unimedPFG != null ){
+               tabelaExames(unimedPFG, "Unimed PF");
+
+          }
+          
 
 
 
@@ -250,11 +285,12 @@ public class ExcelRW {
 //          printTabela("MedGerusa");
 //          printTabela("MedLaurise");
 //          printExames("Exames");
-
-//          writeResume();
-          corrigindoErrosAbreviacao();
+          corrigirErros();
+//          printExames("Exames");
           writeExcelOK();
           writeExcelErros();
+
+//          searchExame("dagoberto");
 //          printErros();
 
      }
@@ -597,25 +633,49 @@ public class ExcelRW {
 
           listUnimed = new ArrayList<>();
           listUnimed.addAll(Arrays.asList(quantG5,filmeG5,medicG5,materG5,totalG5,quantL5,filmeL5,medicL5,materL5,totalL5,quantV5,filmeV5,medicV5,materV5,totalV5,quantP5,totalP5, erros5));
+          
+          //Unimed PF
+          //Unimed
+          quantG6 = getQuant("Unimed PF", "Gerusa");
+          filmeG6 = getFilme("Unimed PF", "Gerusa");
+          medicG6 = getMedicamento("Unimed PF", "Gerusa");
+          materG6 =getMaterial("Unimed PF", "Gerusa");
+          totalG6 = getTotal("Unimed PF", "Gerusa");
+          quantL6 = getQuant("Unimed PF", "Laurise");
+          filmeL6 = getFilme("Unimed PF", "Laurise");
+          medicL6 =getMedicamento("Unimed PF", "Laurise");
+          materL6 =getMaterial("Unimed PF", "Laurise");
+          totalL6 = getTotal("Unimed PF", "Laurise");
+          quantV6 = getQuant("Unimed PF", "Valéria");
+          filmeV6 = getFilme("Unimed PF", "Valéria");
+          medicV6 =getMedicamento("Unimed PF", "Valéria");
+          materV6 =getMaterial("Unimed PF", "Valéria");
+          totalV6 = getTotal("Unimed PF", "Valéria");
+          quantP6 = getQuant("Unimed PF", "Procedimentos");
+          totalP6 = getTotal("Unimed PF", "Procedimentos");
+          erros6 = getErros("Unimed PF");
+
+          listUnimedPF = new ArrayList<>();
+          listUnimedPF.addAll(Arrays.asList(quantG6,filmeG6,medicG6,materG6,totalG6,quantL6,filmeL6,medicL6,materL6,totalL6,quantV6,filmeV6,medicV6,materV6,totalV6,quantP6,totalP6, erros6));
 //
 //          //Ultrasomma
-          quantG6 = addQuant(quantG1, quantG2, quantG3, quantG4, quantG5);
-          totalG6 = addTotal(totalG1,totalG2,totalG3,totalG4,totalG5);
-          quantL6 = addQuant(quantL1, quantL2, quantL3, quantL4, quantL5);
-          totalL6 = addTotal(totalL1,totalL2,totalL3,totalL4,totalL5);
-          quantV6 = addQuant(quantV1, quantV2, quantV3, quantV4, quantV5);
-          totalV6 = addTotal(totalV1,totalV2,totalV3,totalV4,totalV5);
-          quantP6 = addQuant(quantP1, quantP2, quantP3, quantP4, quantP5);
-          totalP6 = addTotal(totalP1,totalP2,totalP3,totalP4,totalP5);
-          erros6 = addQuant(erros1, erros2, erros3,erros4,erros5);
+          quantG7 = addQuant(quantG1, quantG2, quantG3, quantG4, quantG5, quantG6);
+          totalG7 = addTotal(totalG1,totalG2,totalG3,totalG4,totalG5 ,totalG6);
+          quantL7 = addQuant(quantL1, quantL2, quantL3, quantL4, quantL5, quantL6);
+          totalL7 = addTotal(totalL1,totalL2,totalL3,totalL4,totalL5, totalL6);
+          quantV7 = addQuant(quantV1, quantV2, quantV3, quantV4, quantV5, quantV6);
+          totalV7 = addTotal(totalV1,totalV2,totalV3,totalV4,totalV5, totalV6);
+          quantP7 = addQuant(quantP1, quantP2, quantP3, quantP4, quantP5, quantP6);
+          totalP7 = addTotal(totalP1,totalP2,totalP3,totalP4,totalP5, totalP6);
+          erros7 = addQuant(erros1, erros2, erros3,erros4,erros5, erros6);
 
           listUltrasomma = new ArrayList<>();
-          listUltrasomma.addAll(Arrays.asList(quantG6,totalG6,quantL6,totalL6,quantV6,totalV6,quantP6,totalP6,erros6));
+          listUltrasomma.addAll(Arrays.asList(quantG7,totalG7,quantL7,totalL7,quantV7,totalV7,quantP7,totalP7,erros7));
 
-          writeResume(listAfrafep, listCaixa, listCassi, listEmbrapa, listUnimed, listUltrasomma);
+          writeResume(listAfrafep, listCaixa, listCassi, listEmbrapa, listUnimed, listUnimedPF, listUltrasomma);
 
 
-          return Arrays.asList( listAfrafep, listCaixa, listCassi, listEmbrapa, listUnimed, listUltrasomma);
+          return Arrays.asList( listAfrafep, listCaixa, listCassi, listEmbrapa, listUnimed, listUnimedPF, listUltrasomma);
 
 
      }
@@ -682,20 +742,21 @@ public class ExcelRW {
           return String.format("%.2f", total);
      }
 
-     private static String addQuant(String num1, String num2, String num3, String num4, String num5){
+     private static String addQuant(String num1, String num2, String num3, String num4, String num5, String num6){
           int soma = 0;
-          soma = Integer.parseInt(num1) + Integer.parseInt(num2) + Integer.parseInt(num3) + Integer.parseInt(num4) + Integer.parseInt(num5);
+          soma = Integer.parseInt(num1) + Integer.parseInt(num2) + Integer.parseInt(num3) + Integer.parseInt(num4) + Integer.parseInt(num5) + Integer.parseInt(num6);
           return String.format("%d", soma);
      }
 
-     private static String addTotal(String num1, String num2, String num3, String num4, String num5){
+     private static String addTotal(String num1, String num2, String num3, String num4, String num5, String num6){
           double soma = 0.0;
           String num1a = num1.replace(",",".");
           String num2a = num2.replace(",",".");
           String num3a = num3.replace(",",".");
           String num4a = num4.replace(",",".");
           String num5a = num5.replace(",",".");
-          soma = Double.parseDouble(num1a) + Double.parseDouble(num2a) + Double.parseDouble(num3a) + Double.parseDouble(num4a) + Double.parseDouble(num5a);
+          String num6a = num5.replace(",",".");
+          soma = Double.parseDouble(num1a) + Double.parseDouble(num2a) + Double.parseDouble(num3a) + Double.parseDouble(num4a) + Double.parseDouble(num5a) + Double.parseDouble(num6a);
           return String.format("%.2f", soma);
      }
 
@@ -711,15 +772,15 @@ public class ExcelRW {
           return String.format("%d", quant);
      }
 
-     public static void writeResume(List<String> list1, List<String> list2, List<String> list3, List<String> list4, List<String> list5, List<String> list6) throws SQLException, IOException {
+     public static void writeResume(List<String> list1, List<String> list2, List<String> list3, List<String> list4, List<String> list5, List<String> list6 , List<String> list7) throws SQLException, IOException {
 
 
 
           String[] columns= {"Data Inicial", "Data Final", "Convênio", "Medica", "Quantidade de Exames", "Valor Arrecadado", "Valor Arrecadado em Filme", "Valor Arrecadado em Medicamentos", "Valor Arrecadado em Material"};
-          String[] convenios = {"Afrafep", "Caixa", "Cassi", "Embrapa", "Unimed", "Geral"};
+          String[] convenios = {"Afrafep", "Caixa", "Cassi", "Embrapa", "Unimed", "Unimed PF", "Geral"};
           String[] medicas = {"Gerusa", "Laurise", "Valéria", "Procedimentos"};
           int[] totais = {4,9,14,16};
-          ArrayList<List<String>> listas = new ArrayList<>(Arrays.asList(list1, list2, list3, list4, list5, list6));
+          ArrayList<List<String>> listas = new ArrayList<>(Arrays.asList(list1, list2, list3, list4, list5, list6, list7));
           ArrayList<String> periodos = getMinsMax(convenios);
 
           Workbook wb3 = new XSSFWorkbook();
@@ -801,6 +862,31 @@ public class ExcelRW {
                index++;
           }
 
+          //Unimed PF
+
+          index = 0;
+
+          for (int l = 0; l < 4; l++){
+               Row unimedPFRow = sh.createRow(numRow++);
+               unimedPFRow.createCell(0).setCellValue(periodos.get(numPeriodo));
+               unimedPFRow.createCell(1).setCellValue(periodos.get(numPeriodo+1));
+               unimedPFRow.createCell(2).setCellValue(convenios[5]);
+               unimedPFRow.createCell(3).setCellValue(medicas[l]);
+               unimedPFRow.createCell(4).setCellValue(listas.get(5).get(index));
+               index++;
+               unimedPFRow.createCell(5).setCellValue(listas.get(5).get(totais[l]));
+               if(l == 3){
+                    break;
+               }
+               unimedPFRow.createCell(6).setCellValue(listas.get(5).get(index));
+               index++;
+               unimedPFRow.createCell(7).setCellValue(listas.get(5).get(index));
+               index++;
+               unimedPFRow.createCell(8).setCellValue(listas.get(5).get(index));
+               index++;
+               index++;
+          }
+
           //Geral
           index = 0;
 
@@ -808,11 +894,11 @@ public class ExcelRW {
                Row geralRow = sh.createRow(numRow++);
                geralRow.createCell(0).setCellValue("");
                geralRow.createCell(1).setCellValue("");
-               geralRow.createCell(2).setCellValue(convenios[5]);
+               geralRow.createCell(2).setCellValue(convenios[6]);
                geralRow.createCell(3).setCellValue(medicas[m]);
-               geralRow.createCell(4).setCellValue(listas.get(5).get(index));
+               geralRow.createCell(4).setCellValue(listas.get(6).get(index));
                index++;
-               geralRow.createCell(5).setCellValue(listas.get(5).get(index));
+               geralRow.createCell(5).setCellValue(listas.get(6).get(index));
                index++;
           }
 
@@ -847,7 +933,7 @@ public class ExcelRW {
 
      public static void writeExcelOK() throws SQLException, IOException {
           String[] columns = {"Data", "Nome do Paciente", "Procedimento", "Valor", "Convênio", "Médica"};
-          String[] convenios = {"Afrafep", "Caixa", "Cassi", "Embrapa", "Unimed"};
+          String[] convenios = {"Afrafep", "Caixa", "Cassi", "Embrapa", "Unimed", "Unimed PF"};
           Workbook wb2 = new XSSFWorkbook();
 
           //Fonts & Styles
@@ -910,8 +996,8 @@ public class ExcelRW {
      }
 
      public static void writeExcelErros() throws SQLException, IOException {
-          String[] columns = {"Data", "Nome do Paciente", "Procedimento", "Valor", "Convênio"};
-          String[] convenios = {"Afrafep", "Caixa", "Cassi", "Embrapa", "Unimed"};
+          String[] columns = {"Data", "Nome do Paciente", "Procedimento", "Valor", "Convênio", "Médica", "Erro"};
+          String[] convenios = {"Afrafep", "Caixa", "Cassi", "Embrapa", "Unimed", "Unimed PF"};
           Workbook wb2 = new XSSFWorkbook();
 
           //Fonts & Styles
@@ -997,13 +1083,18 @@ public class ExcelRW {
           return true;
      }
 
-     private static void corrigindoErrosAbreviacao() throws SQLException {
+     private static void corrigirErros() throws SQLException {
+          corrigindoErrosAbreviacao("Unimed");
+          corrigindoErrosAbreviacao("Unimed PF");
+          corrigindoErrosPreposicao("Unimed");
+     }
 
-          sql = "select * from exames" +
-                  " where convenio = 'Unimed' and medica = 'error';";
+     private static void corrigindoErrosAbreviacao(String convenio) throws SQLException {
+
+          sql = String.format("select * from exames" +
+                  " where convenio = '%s' and medica = 'error';", convenio);
           query = stm.executeQuery(sql);
           ResultSet query1;
-          int query2;
           Statement stm1 = con.createStatement();
           String errado = "";
           int id = 0;
@@ -1011,13 +1102,10 @@ public class ExcelRW {
           String sqlL = "";
           String sqlV = "";
           String sqlP = "";
-          double total = 0.0;
           while(query.next()){
                String[] palavras = {};
                errado = query.getString(2);
                id = query.getInt(7);
-//               System.out.println(errado);
-//               System.out.println(id);
                palavras =  errado.split(" ");
                sqlG = "select * from MedGerusa where";
                sqlL = "select * from MedLaurise where";
@@ -1057,55 +1145,124 @@ public class ExcelRW {
                     medica = "Procedimentos";
                }
 
-               if(medica.equals("Gerusa")){
-                    sql = String.format("update exames " +
-                            "set medica = '%s' " +
-                            "where id = %d;", medica, id);
-                    query2 = stm1.executeUpdate(sql);
-//                    System.out.println(query2);
-
-               }
-               else if(medica.equals("Laurise")){
-                    sql = String.format("update exames " +
-                            "set medica = '%s' " +
-                            "where id = %d;", medica, id);
-                    query2 = stm1.executeUpdate(sql);
-//                    System.out.println(query2);
-
-               }
-               else if(medica.equals("Valéria")){
-                    sql = String.format("update exames " +
-                            "set medica = '%s' " +
-                            "where id = %d;", medica, id);
-                    query2 = stm1.executeUpdate(sql);
-//                    System.out.println(query2);
-
-               }
-               else if(medica.equals("Procedimentos")){
-                    sql = String.format("update exames " +
-                            "set medica = '%s' " +
-                            "where id = %d;", medica, id);
-                    query2 = stm1.executeUpdate(sql);
-//                    System.out.println(query2);
+               switch (medica) {
+                    case "Gerusa", "Laurise", "Valéria", "Procedimentos" -> {
+                         sql = String.format("update exames " +
+                                 "set medica = '%s' " +
+                                 "where id = %d;", medica, id);
+                         stm1.executeUpdate(sql);
+                    }
                }
 
-
-
-//               sql = "SELECT * FROM Med" +
-//                       "WHERE column1 LIKE '%word1%'" +
-//                       "  AND column1 LIKE '%word2%'" +
-//                       "";
           }
-//          String teste = "simone";
-//          sql = "select * from MedValeria" +
-//                  " where nome LIKE " +
-//                  "'%" + teste + "%';";
-//          query = stm.executeQuery(sql);
-//          System.out.println("testing");
-//          while(query.next()){
-//               System.out.println(query.getString(2));
-//          }
 
+     }
+
+     private static void corrigindoErrosPreposicao(String convenio) throws SQLException {
+
+          sql = String.format("select * from exames" +
+                  " where convenio = '%s' and medica = 'error';", convenio);
+          query = stm.executeQuery(sql);
+          ResultSet query1;
+          Statement stm1 = con.createStatement();
+          String errado = "";
+          int id = 0;
+          String sqlG = "";
+          String sqlL = "";
+          String sqlV = "";
+          String sqlP = "";
+          while(query.next()) {
+               String[] palavras = {};
+               ArrayList<String> semD = new ArrayList<>();
+               errado = query.getString(2);
+               id = query.getInt(7);
+               palavras = errado.split(" ");
+               for (int i = 0; i < palavras.length; i++) {
+                    if (palavras[i].equals("de")) {
+                         continue;
+//                         System.out.println("\nde " + palavras[i]);
+                    } else if (palavras[i].equals("da")) {
+                         continue;
+//                         System.out.println("\nda" + palavras[i]);
+                    } else if (palavras[i].equals("do")) {
+                         continue;
+//                         System.out.println("\ndo" + palavras[i]);
+                    } else if (palavras[i].equals("dos")) {
+                         continue;
+//                         System.out.println("\ndos" + palavras[i]);
+                    } else if (palavras[i].equals("das")) {
+                         continue;
+//                         System.out.println("\ndas" + palavras[i]);
+                    } else {
+                         semD.add(palavras[i]);
+                    }
+               }
+
+               System.out.println("Essas é o nome sem Preposição:");
+               for (String s : semD) {
+                    System.out.println(s);
+               }
+               System.out.println("\n\n");
+
+               sqlG = "select * from MedGerusa where";
+               sqlL = "select * from MedLaurise where";
+               sqlV = "select * from MedValeria where";
+               sqlP = "select * from procedimentos where";
+               medica = "";
+               int cont = 1;
+               for (String palavra : semD){
+                    if(cont < semD.size()){
+                         sqlG += " nome LIKE '%" + palavra + "%' AND";
+                         sqlL += " nome LIKE '%" + palavra + "%' AND";
+                         sqlV += " nome LIKE '%" + palavra + "%' AND";
+                         sqlP += " nome LIKE '%" + palavra + "%' AND";
+                    }else{
+                         sqlG += " nome LIKE '%" + palavra + "%';";
+                         sqlL += " nome LIKE '%" + palavra + "%';";
+                         sqlV += " nome LIKE '%" + palavra + "%';";
+                         sqlP += " nome LIKE '%" + palavra + "%';";
+                    }
+                    cont++;
+
+               }
+               query1 = stm1.executeQuery(sqlG);
+               while(query1.next()){
+                    medica = "Gerusa";
+               }
+               query1 = stm1.executeQuery(sqlL);
+               while(query1.next()){
+                    medica = "Laurise";
+               }
+               query1 = stm1.executeQuery(sqlV);
+               while(query1.next()){
+                    medica = "Valéria";
+               }
+               query1 = stm1.executeQuery(sqlP);
+               while(query1.next()){
+                    medica = "Procedimentos";
+               }
+
+               switch (medica) {
+                    case "Gerusa", "Laurise", "Valéria", "Procedimentos" -> {
+                         sql = String.format("update exames " +
+                                 "set medica = '%s' " +
+                                 "where id = %d;", medica, id);
+                         stm1.executeUpdate(sql);
+                    }
+               }
+
+          }
+
+     }
+
+     private static void searchExame(String nome) throws SQLException {
+          sql = String.format("select * from Exames" +
+                  " where nome LIKE '%s';", nome);
+          query = stm.executeQuery(sql);
+          System.out.println("\n"+ "Exames do Paciente " + nome);
+          while(query.next()){
+               System.out.println(query.getDate(1) + "\t\t" + query.getString(2) + "\t\t" + query.getString(3) + "\t\t" + query.getDouble(4) + "\t\t" + query.getString(5)+ "\t\t" + query.getString(6));
+          }
      }
 
 
