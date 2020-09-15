@@ -1016,8 +1016,8 @@ public class ExcelRW {
                String[] palavras = {};
                errado = query.getString(2);
                id = query.getInt(7);
-               System.out.println(errado);
-               System.out.println(id);
+//               System.out.println(errado);
+//               System.out.println(id);
                palavras =  errado.split(" ");
                sqlG = "select * from MedGerusa where";
                sqlL = "select * from MedLaurise where";
@@ -1062,7 +1062,7 @@ public class ExcelRW {
                             "set medica = '%s' " +
                             "where id = %d;", medica, id);
                     query2 = stm1.executeUpdate(sql);
-                    System.out.println(query2);
+//                    System.out.println(query2);
 
                }
                else if(medica.equals("Laurise")){
@@ -1070,7 +1070,7 @@ public class ExcelRW {
                             "set medica = '%s' " +
                             "where id = %d;", medica, id);
                     query2 = stm1.executeUpdate(sql);
-                    System.out.println(query2);
+//                    System.out.println(query2);
 
                }
                else if(medica.equals("Valéria")){
@@ -1078,7 +1078,7 @@ public class ExcelRW {
                             "set medica = '%s' " +
                             "where id = %d;", medica, id);
                     query2 = stm1.executeUpdate(sql);
-                    System.out.println(query2);
+//                    System.out.println(query2);
 
                }
                else if(medica.equals("Procedimentos")){
@@ -1086,7 +1086,7 @@ public class ExcelRW {
                             "set medica = '%s' " +
                             "where id = %d;", medica, id);
                     query2 = stm1.executeUpdate(sql);
-                    System.out.println(query2);
+//                    System.out.println(query2);
                }
 
 
